@@ -91,6 +91,11 @@ function App() {
     return {};
   };
 
+  const getBalance = async (hash) => {
+    let response = await alchemy.core.getBalance(hash, "latest");
+    return response;
+  };
+
   const Block = () => {
     return (
       <>
@@ -144,6 +149,7 @@ function App() {
                 <th>Value</th>
                 <th>Transaction Fee</th>
                 <th>Data</th>
+                <th>Balance</th>
               </tr>
             </thead>
             <tbody>
@@ -165,6 +171,7 @@ function App() {
                     </th>
                     <th>{calcFee(transaction, 5)}</th>
                     <th>{getSubstring(transaction.data, 15)}</th>
+                    <th>{getBalance(transaction.from)}</th>
                   </tr>
                 );
               })}
